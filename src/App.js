@@ -1,22 +1,36 @@
 import React from 'react';
-import Todo from './Todo';
 import './App.css';
+import { Paper, List } from '@material-ui/core';
+import Todo from './Todo'
 
 class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      item: {id: 0, title: "hello world 1", done: true},
+      items: [
+        {id: 0, title: "Hello World 1", done: true},
+        {id:1, title:"Hello World 2", done: false},
+        {id:2, title:"Hello World 3", done: false},
+    ]
     };
   }
 
-  render(){
+  render() {
+    var todoItems = this.state.items.length>0 &&(
+      <Paper style={{margin:16}}>
+        <List>
+          {this.state.items.map((item, idx)=>(
+            <Todo item={item} key={item.id} />
+          ))}
+        </List>
+      </Paper>
+    );
     return (
       <div className="App">
-        <Todo item={this.state.item}/>
+        {todoItems}
       </div>
-    );
-  }  
+  );
+  }
 }
 
 export default App;
